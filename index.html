@@ -675,7 +675,7 @@ input[type="checkbox"] { accent-color: var(--accent); width: 14px; height: 14px;
 
         <div class="field-group toggle-group">
           <label class="toggle-label">
-            <input type="checkbox" id="use-relativistic"> Relativistic physics (SR)
+            <input type="checkbox" id="use-relativistic" checked> Relativistic physics (SR)
             <span class="help-tip" data-tip="Applies Einstein's Special Relativity. At high speeds (v &gt; 10% of c), classical physics is wrong — SR replaces it with dv/dt = a/γ³, so the ship asymptotically approaches c but never reaches it. The crew ages more slowly than observers on Earth: this gap is time dilation, and it grows dramatically near c.">?</span>
           </label>
           <label class="toggle-label">
@@ -761,7 +761,7 @@ input[type="checkbox"] { accent-color: var(--accent); width: 14px; height: 14px;
 
         <div class="field-group toggle-group">
           <label class="toggle-label">
-            <input type="checkbox" id="ls-use-relativistic"> Relativistic physics (SR)
+            <input type="checkbox" id="ls-use-relativistic" checked> Relativistic physics (SR)
             <span class="help-tip" data-tip="Applies Einstein's Special Relativity. At high speeds (v &gt; 10% of c), classical physics is wrong — SR replaces it with dv/dt = a/γ³, so the ship asymptotically approaches c but never reaches it. The crew ages more slowly than observers on Earth: this gap is time dilation, and it grows dramatically near c.">?</span>
           </label>
         </div>
@@ -896,25 +896,25 @@ const PRESETS = {
     label: 'Racer-X: Mars (Close Approach)',
     cls: 'racer-x', color: '#38bdf8',
     d: 5.6e10, a: 0.02, isp: 2500, massRatio: 13,
-    mode: 'brachistochrone', infinite: false, relativistic: false,
+    mode: 'brachistochrone', infinite: false, relativistic: true,
   },
   'rx-far': {
     label: 'Racer-X: Mars (Far Approach)',
     cls: 'racer-x', color: '#38bdf8',
     d: 4.0e11, a: 0.02, isp: 2500, massRatio: 13,
-    mode: 'brachistochrone', infinite: false, relativistic: false,
+    mode: 'brachistochrone', infinite: false, relativistic: true,
   },
   'ry-brach': {
     label: 'Racer-Y: Neptune Brachistochrone',
     cls: 'racer-y', color: '#34d399',
     d: 4.5e12, a: 6e-4, isp: 2500, massRatio: 20,
-    mode: 'brachistochrone', infinite: false, relativistic: false,
+    mode: 'brachistochrone', infinite: false, relativistic: true,
   },
   'ry-dart': {
     label: 'Racer-Y: Neptune Dart',
     cls: 'racer-y', color: '#34d399',
     d: 4.5e12, a: 6e-4, isp: 2500, massRatio: 20,
-    mode: 'dart', infinite: false, relativistic: false,
+    mode: 'dart', infinite: false, relativistic: true,
   },
   'rz-proxima': {
     label: 'Racer-Z: Proxima Centauri',
@@ -937,7 +937,7 @@ const PRESETS = {
     reflectivity: 0,
     divergence_urad: 0.01,   // tight beam, cutoff ≈ 564,000 km
     max_flux_wm2: 1e9,       // 1 GW/m²
-    relativistic: false,
+    relativistic: true,
   },
   'lx-probe': {
     label: 'Laser-X: Probe → Neptune',
@@ -950,7 +950,7 @@ const PRESETS = {
     reflectivity: 0,
     divergence_urad: 0.001,  // cutoff ≈ 50,000,000 km ≈ 0.34 AU
     max_flux_wm2: 5e8,
-    relativistic: false,
+    relativistic: true,
   },
   'lx-crew': {
     label: 'Laser-X: Crew Module → Proxima',
