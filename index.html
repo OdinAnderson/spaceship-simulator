@@ -90,6 +90,104 @@ header p {
   font-size: 0.93rem;
 }
 
+/* ── INTRO ───────────────────────────────────────────── */
+.intro {
+  max-width: 780px;
+  margin: 0 auto 20px;
+  text-align: center;
+  color: var(--text2);
+  font-size: 0.92rem;
+  line-height: 1.65;
+}
+.info-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-left: 4px;
+  padding: 2px 10px 2px 8px;
+  border-radius: 20px;
+  border: 1px solid rgba(56,189,248,.35);
+  background: rgba(56,189,248,.1);
+  color: var(--accent);
+  font-size: 0.82rem;
+  font-weight: 600;
+  font-family: var(--font);
+  cursor: pointer;
+  white-space: nowrap;
+  vertical-align: middle;
+  transition: background 0.15s, border-color 0.15s;
+}
+.info-btn:hover { background: rgba(56,189,248,.2); border-color: rgba(56,189,248,.6); }
+.info-btn span { font-size: 1rem; line-height: 1; }
+
+/* ── ELI5 MODAL ──────────────────────────────────────── */
+dialog#eli5-modal {
+  margin: auto; /* dialogs auto-center via margin:auto — don't let a global reset zero it out */
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--card);
+  color: var(--text);
+  padding: 0;
+  max-width: 640px;
+  width: calc(100vw - 40px);
+  max-height: calc(100vh - 64px);
+  box-shadow: 0 20px 60px rgba(0,0,0,.6);
+}
+dialog#eli5-modal::backdrop {
+  background: rgba(3,6,12,.75);
+  backdrop-filter: blur(2px);
+}
+dialog#eli5-modal .modal-card {
+  position: relative;
+  padding: 28px 26px 24px;
+  overflow-y: auto;
+  max-height: calc(100vh - 64px);
+}
+dialog#eli5-modal h2 {
+  font-size: 1.25rem;
+  font-weight: 800;
+  margin-bottom: 14px;
+  padding-right: 28px;
+  background: linear-gradient(130deg, #38bdf8 10%, #a78bfa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+dialog#eli5-modal h3 {
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--accent);
+  margin: 18px 0 6px;
+}
+dialog#eli5-modal h3:first-of-type { margin-top: 0; }
+dialog#eli5-modal p {
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: var(--text2);
+}
+dialog#eli5-modal p strong { color: var(--text); }
+.modal-close {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--bg2);
+  color: var(--text2);
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s, color 0.15s;
+}
+.modal-close:hover { background: var(--card2); color: var(--text); }
+
 /* ── PRESETS ─────────────────────────────────────────── */
 .presets {
   display: flex;
@@ -587,6 +685,77 @@ input[type="checkbox"] { accent-color: var(--accent); width: 14px; height: 14px;
     <h1>&#128640; Spacecraft Flight Simulator</h1>
     <p>Interplanetary &amp; interstellar scenarios — classical kinematics + special relativity</p>
   </header>
+
+  <!-- INTRO -->
+  <div class="intro">
+    <p>
+      Real spacecraft don't accelerate forever — they're limited by how much fuel they can carry
+      (or, for laser sails, how tightly a beam can stay focused across trillions of kilometers).
+      Plug in real mission numbers &mdash; engine efficiency, fuel load, laser power &mdash; and see
+      the actual trip: how fast you go, how long it takes, and, once you're near light speed, how
+      much time relativity steals from the people back home.
+      <button type="button" id="eli5-btn" class="info-btn" aria-haspopup="dialog" aria-controls="eli5-modal">
+        <span aria-hidden="true">&#9432;</span> What is this?
+      </button>
+    </p>
+  </div>
+
+  <dialog id="eli5-modal">
+    <div class="modal-card">
+      <button type="button" id="eli5-close" class="modal-close" aria-label="Close">&times;</button>
+      <h2>What is this, actually?</h2>
+
+      <h3>What this simulator does</h3>
+      <p>
+        It models real spacecraft trajectories between planets and stars &mdash; how fast you go,
+        how long the trip takes, and (once you're going fast enough) how Einstein's relativity
+        bends time itself for the people on board.
+      </p>
+
+      <h3>Rockets &amp; the rocket equation</h3>
+      <p>
+        Every rocket carries fuel, and fuel is heavy &mdash; the more speed you want to gain
+        (&Delta;v, "delta-v"), the exponentially more fuel you need. That's the rocket equation:
+        double your target speed and your fuel needs don't just double, they multiply by a lot
+        more. Specific impulse (Isp) measures how efficiently an engine turns fuel into thrust;
+        the mass ratio is how much of the ship's launch weight is just propellant.
+      </p>
+
+      <h3>Brachistochrone vs. dart</h3>
+      <p>
+        Two ways to fly. A <strong>dart</strong> just accelerates the whole way and arrives going
+        as fast as possible &mdash; great for a flyby probe, bad if you want to stop.
+        A <strong>brachistochrone</strong> burns half the trip accelerating, then flips around and
+        burns the other half decelerating, arriving at a stop &mdash; the way you'd actually want
+        to travel if there are people on board.
+      </p>
+
+      <h3>Special relativity</h3>
+      <p>
+        Once you're going a meaningful fraction of the speed of light, Newton's classical physics
+        starts giving wrong answers. Special relativity fixes that: nothing can ever quite reach
+        light speed no matter how long you accelerate (you just get diminishing returns), and time
+        runs slower for the people on the ship than for people back on Earth &mdash; the faster you
+        go, the bigger that gap gets.
+      </p>
+
+      <h3>Laser sails</h3>
+      <p>
+        Instead of carrying fuel, a laser sail rides a beam of light pushed from a stationary laser
+        back home &mdash; a real proposal (Breakthrough Starshot) for reaching nearby stars with
+        tiny, ultra-light probes. No fuel to carry means no rocket-equation penalty, but the beam
+        has to stay focused over enormous distances, and it can only push, never slow the craft
+        back down.
+      </p>
+
+      <h3>Where to start</h3>
+      <p>
+        Click any preset above &mdash; Racer-X/Y/Z for rocket missions, Laser-X for light-sail
+        missions &mdash; each is a complete, ready-to-run example. Or enter your own numbers and
+        click Run Simulation.
+      </p>
+    </div>
+  </dialog>
 
   <!-- PRESETS -->
   <div class="presets">
@@ -1840,6 +2009,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   updateRocketPreview();
   loadPreset('rx-close');
+
+  // ELI5 modal
+  const eli5Modal = document.getElementById('eli5-modal');
+  document.getElementById('eli5-btn').addEventListener('click', () => eli5Modal.showModal());
+  document.getElementById('eli5-close').addEventListener('click', () => eli5Modal.close());
+  eli5Modal.addEventListener('click', e => { if (e.target === eli5Modal) eli5Modal.close(); });
 });
 </script>
 </body>
